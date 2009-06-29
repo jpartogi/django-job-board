@@ -11,11 +11,11 @@ from django.conf import settings
 
 from recaptcha.client import captcha
 
-from portal.apps.utils import thirty_days_range
-from portal.apps.common import create_message
-from portal.apps.jobs.models import *
-from portal.apps.member.models import *
-from portal.apps.jobs.forms import *
+from djobb import create_message
+from djobb.utils import thirty_days_range
+from djobb.models import *
+from djobb.forms import *
+#from portal.apps.member.models import *
 
 def add(request):
     html_captcha = captcha.displayhtml(settings.RECAPTCHA_PUB_KEY)

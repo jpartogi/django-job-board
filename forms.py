@@ -3,8 +3,7 @@ from django.forms import ModelForm
 
 from tinymce.widgets import TinyMCE
 
-from portal.apps.jobs.models import *
-from portal.apps.common.models import *
+from djobb.models import *
 
 class JobForm(ModelForm):
     title = forms.CharField(label = 'Title', help_text='"Senior Java Programmer" or "Web Designer"',

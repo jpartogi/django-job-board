@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import *
 
-urlpatterns = patterns('portal.apps.jobs.views',
+urlpatterns = patterns('djobb.views',
     (r'^$', 'list'),
     (r'^add/$', 'add'),
     (r'^(?P<job_id>\d+)/$', 'view'),
