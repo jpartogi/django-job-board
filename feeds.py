@@ -2,6 +2,7 @@ from django.contrib.syndication.feeds import Feed
 from django.utils.feedgenerator import Atom1Feed
 
 from djobb.models import Job
+from djobb.utils import thirty_days_range
 
 class LatestJobs(Feed):
     feed_type = Atom1Feed
@@ -11,7 +12,7 @@ class LatestJobs(Feed):
     description_template = 'job/feed.html'
 
     def items(self):
-        return Job.objects.order_by('-posted')[:10]
+        return Job.objects.filter(posted__gt=thirty_days_range()).order_by('-posted')
 
     def item_author_name(self, item):
         """

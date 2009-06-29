@@ -1,6 +1,5 @@
 from datetime import datetime
 
-from django.core import serializers
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.shortcuts import render_to_response,get_object_or_404
 from django.template import RequestContext
@@ -15,7 +14,6 @@ from djobb import create_message
 from djobb.utils import thirty_days_range
 from djobb.models import *
 from djobb.forms import *
-#from portal.apps.member.models import *
 
 def add(request):
     html_captcha = captcha.displayhtml(settings.RECAPTCHA_PUB_KEY)
