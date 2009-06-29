@@ -1,9 +1,8 @@
 from datetime import datetime
 
-from django.db import models
 from django.contrib import admin
 
-from portal.apps.jobs.models import Job
+from djobb.models import Job
 
 class JobAdmin(admin.ModelAdmin):
     date_hierarchy = 'posted'
