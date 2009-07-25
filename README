@@ -1,0 +1,7 @@
+.. -*-restructuredtext-*-
+
+======
+djobb
+======
+
+A django based pluggable job board application extracted from original Scrum8.com
