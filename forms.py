@@ -1,8 +1,6 @@
 from django import forms
 from django.forms import ModelForm
 
-from tinymce.widgets import TinyMCE
-
 from djobb.models import *
 
 class JobForm(ModelForm):
@@ -11,7 +9,7 @@ class JobForm(ModelForm):
     skills_required = forms.CharField(help_text='A comma separated value of skills. e.g: Java, Linux, Postgres',
                             required=False,
                             widget=forms.Textarea(attrs={'rows':'5'}))
-    description = forms.CharField(widget=TinyMCE(attrs={'cols': 90, 'rows': 15}))
+    description = forms.CharField(widget=forms.Textarea(attrs={'cols': 90, 'rows': 15}))
     job_type = forms.CharField(widget=forms.RadioSelect(choices=TYPE))
     location = forms.CharField(help_text='"Jakarta, Indonesia" or "Boston, MA" or "Sydney, NSW"')
     budget = forms.CharField(help_text = 'The budget for salary', required=False)

@@ -1,7 +1,5 @@
 from django.db import models
 
-from tinymce import models as tinymce_models
-
 TYPE = (
         ('P', 'Permanent'),
         ('C', 'Contract'),
@@ -10,7 +8,7 @@ TYPE = (
 
 class Job(models.Model):
     title = models.CharField(max_length=128)
-    description = tinymce_models.HTMLField()
+    description = models.TextField()
     #notes = models.CharField(max_length=128, null=True)
     posted = models.DateTimeField()
     #closed = models.BooleanField(default=False)
