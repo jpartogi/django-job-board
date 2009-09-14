@@ -21,10 +21,10 @@ def add(request):
     if request.method == 'POST':
 
         check_captcha = captcha.submit(request.POST['recaptcha_challenge_field'], 
-									   request.POST['recaptcha_response_field'], 
-									   settings.RECAPTCHA_PRIVATE_KEY, request.META['SERVER_NAME'])
+                                       request.POST['recaptcha_response_field'],
+                                       settings.RECAPTCHA_PRIVATE_KEY, request.META['SERVER_NAME'])
         
-		if check_captcha.is_valid is False:
+	if check_captcha.is_valid is False:
             # Captcha is wrong show an error ...
             create_message(request, 'Captcha challenge is wrong.')
             
