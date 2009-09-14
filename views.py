@@ -10,7 +10,6 @@ from django.conf import settings
 
 from recaptcha.client import captcha
 
-from djobb import create_message
 from djobb.utils import thirty_days_range
 from djobb.models import *
 from djobb.forms import *
@@ -26,7 +25,7 @@ def add(request):
         
 	if check_captcha.is_valid is False:
             # Captcha is wrong show an error ...
-            create_message(request, 'Captcha challenge is wrong.')
+            request.notifications.create('Captcha challenge is wrong.', 'error')
             
             return HttpResponseRedirect(request.path)
 
@@ -38,8 +37,8 @@ def add(request):
 
             job.save()
 
-            create_message(request, 'The job has been saved successfully.')
-            
+            request.notifications.create('Your job posting has been saved successfully.', 'success')
+
             return HttpResponseRedirect('/job/' + str(job.id)) # Redirect after POST
 
     else:
@@ -116,6 +115,7 @@ def my_jobs(request):
                                                'job_list' : job_list},
                               context_instance=RequestContext(request))
 
+#TODO: view and list can just use generic views
 def view(request, job_id):
     job = get_object_or_404(Job, id=job_id)
 
