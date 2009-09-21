@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 
-from djobb.models import *
+from job.models import *
 
 class JobForm(ModelForm):
     title = forms.CharField(label = 'Title', help_text='"Senior Java Programmer" or "Web Designer"',

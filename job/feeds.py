@@ -1,8 +1,8 @@
 from django.contrib.syndication.feeds import Feed
 from django.utils.feedgenerator import Atom1Feed
 
-from djobb.models import Job
-from djobb.utils import thirty_days_range
+from job.models import Job
+from job.utils import thirty_days_range
 
 class LatestJobs(Feed):
     feed_type = Atom1Feed

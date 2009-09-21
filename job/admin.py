@@ -2,7 +2,7 @@ from datetime import datetime
 
 from django.contrib import admin
 
-from djobb.models import Job
+from job.models import Job
 
 class JobAdmin(admin.ModelAdmin):
     date_hierarchy = 'posted'

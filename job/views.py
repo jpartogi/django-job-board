@@ -10,9 +10,9 @@ from django.conf import settings
 
 from recaptcha.client import captcha
 
-from djobb.utils import thirty_days_range
-from djobb.models import *
-from djobb.forms import *
+from commons.utils import days_range
+from job.models import *
+from job.forms import *
 
 def add(request):
     html_captcha = captcha.displayhtml(settings.RECAPTCHA_PUB_KEY)
@@ -125,7 +125,7 @@ def view(request, job_id):
     }, context_instance=RequestContext(request))
 
 def list(request):
-    jobs = Job.objects.filter(posted__gt=thirty_days_range()).order_by('-posted')
+    jobs = Job.objects.filter(posted__gt=days_range(30)).order_by('-posted')
     paginator = Paginator(jobs, 10)
 
     # Make sure page request is an int. If not, deliver first page.
