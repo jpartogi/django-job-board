@@ -1,1 +1,20 @@
 {% extends 'base.html' %}
+
+{% block content %}
+<div id="content"> 
+	{% for job in job_list %}
+		{{ job.title }} {{ job.company_name }}
+		{{ job.posted }}
+		{{ job.job_type }}
+		{{ job.description }}
+		
+		{{ job.skills_required }}
+		{{ job.budget }}
+		
+		{{ job.location }} {{ job.onsite_required }}
+		
+		{{ job.contact_email }} {{ job.contact_person }}
+		{{ job.website }}
+	{% endfor %}
+</div>
+{% endblock %}
