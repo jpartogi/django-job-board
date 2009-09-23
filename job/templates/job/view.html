@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div id="content"> 
+		
+		{{ job.job_type }}
+		{{ job.description }}
+		
+		{{ job.skills_required }}
+		{{ job.budget }}
+		
+		 {{ job.onsite_required }}
+		
+		{{ job.contact_email }} {{ job.contact_person }}
+		{{ job.website }}
+</div>
+{% endblock %}
