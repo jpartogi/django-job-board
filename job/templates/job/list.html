@@ -1,13 +1,25 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div id="content"> 
-	{% for job in job_list %}
-		<div class="block">
-			<strong>{{ job.location }}</strong>: <a href='{{ job.get_absolute_url }}'>{{ job.title }}</a> <span>at</span> 
-			<a href="{{ job.website }}">{{ job.company_name }}</a>
-			<span>posted on</span> {{ job.posted|date:"d/m/Y H:s" }}
-		</div>
-	{% endfor %}
+<div id="content">
+    <div id="form-link"><a href="{% url job-form %}">Add New Job</a> &raquo;</div>
+    <div style="clear:both"></div>
+
+    <div id="job-list">
+    {% for job in job_list %}
+        <div class="block {% cycle 'odd' 'even' %}">
+            <strong>{{ job.location }}</strong>: <a href='{{ job.get_absolute_url }}'>{{ job.title }}</a>
+            <span class="small">at</span>
+            
+            {% if job.website %} 
+            <a href="{{ job.website }}">{{ job.company_name }}</a>
+            {% else %}
+            {{ job.company_name }}
+            {% endif %}
+
+            <span class="small"><em>posted on</em> {{ job.posted|date:"d/m/Y H:s" }}</span>
+        </div>
+    {% endfor %}
+    </div>
 </div>
 {% endblock %}

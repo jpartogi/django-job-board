@@ -24,9 +24,9 @@ job_detail_dict = {
 }
 
 urlpatterns = patterns('',
-	(r'^feed/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': feeds}, 'job-feeds'),
+    (r'^feed/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': feeds}, 'job-feeds'),
 	
-    #(r'^add/$', 'job.views.add'),
+    (r'^new/$', 'job.views.add', {}, 'job-form'),
     #(r'^my/$', 'job.views.my_jobs'),
     #(r'^edit/(?P<job_id>\d+)/$', 'job.views.edit'),
 	
