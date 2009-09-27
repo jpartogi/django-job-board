@@ -18,8 +18,8 @@ job_list_dict = {
 }
 
 job_detail_dict = {
-	'queryset': queryset,
-	'template_name': 'job/view.html',
+    'queryset': queryset,
+    'template_name': 'job/view.html',
     'template_object_name': 'job'
 }
 

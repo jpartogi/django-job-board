@@ -13,7 +13,7 @@ class JobAdmin(admin.ModelAdmin):
             'fields': ('title', 'slug', 'job_type', 'description', 'skills_required', ('location', 'onsite_required')),
         }),
         ('Company Information', {
-            'fields': ('company_name', ('contact_person', 'contact_email'), 'website', 'budget'),
+            'fields': ('company_name', ('contact_person', 'contact_email'), 'website'),
         }),
     )
         
