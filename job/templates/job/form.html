@@ -2,7 +2,7 @@
 
 {% block content %}
 <div id="content">
-    <form action="{{ request.path }}" method="POST">
+    <form id="form" action="{{ request.path }}" method="POST">
     {{ form.as_p }}
 
     {{ html_captcha|safe }}

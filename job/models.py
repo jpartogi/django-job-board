@@ -13,7 +13,7 @@ class Job(models.Model):
     slug = models.SlugField(max_length=50)
     description = models.TextField()
     posted = models.DateTimeField(auto_now_add=True)
-    skills_required = models.TextField(null=True, blank=True)
+    skills_required = models.CharField(max_length=50)
     location = models.CharField(max_length=128)
     onsite_required = models.BooleanField(default=False)
     job_type = models.CharField(max_length=1,choices=TYPE)

@@ -12,9 +12,9 @@ from job.forms import *
 #TODO: Add form preview before submitting
 def add(request):
     html_captcha = captcha.displayhtml(settings.RECAPTCHA_PUB_KEY)
-
+    
     if request.method == 'POST':
-
+        
         check_captcha = captcha.submit(request.POST['recaptcha_challenge_field'], 
                                        request.POST['recaptcha_response_field'],
                                        settings.RECAPTCHA_PRIVATE_KEY,
@@ -24,8 +24,8 @@ def add(request):
             # Captcha is wrong show an error ...
             request.notifications.create('Captcha challenge is wrong.', 'error')
             
-            return HttpResponseRedirect(request.path)
-
+            return HttpResponseRedirect(reverse('job-form'))
+        
         form = JobForm(request.POST)
 
         if form.is_valid():
