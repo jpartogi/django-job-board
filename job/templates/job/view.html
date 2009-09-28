@@ -2,16 +2,21 @@
 
 {% block content %}
 <div id="content"> 
-		
-    {{ job.job_type }}
+    <div style="margin-bottom:1em">&laquo; <a href="{% url job-list %}">Back</a></div>
+
+    <h2 id="title">{{ job.title }} <span>at</span> {{ job.company_name }}</h2>
+    {% if job.website %}<div><strong>Website:</strong> {{ job.website|urlize }}</div>{% endif %}
+    <div><strong>Type:</strong> {{ job.job_type }}</div>
+
+    {% if job.onsite_required %}<div><strong>Required onsite</strong></div>{% endif %}
+
+    <div class="desc">
     {{ job.description }}
+    </div>
+    
+    <div><strong>Skills required:</strong> {{ job.skills_required }}</div>
+    <div><strong>Contact:</strong> {{ job.contact_person }} ({{ job.contact_email|urlize }})</div>
 
-    {{ job.skills_required }}
-    {{ job.budget }}
-
-     {{ job.onsite_required }}
-
-    {{ job.contact_email }} {{ job.contact_person }}
-    {{ job.website }}
+    <div style="margin-top:1em">&laquo; <a href="{% url job-list %}">Back</a></div>
 </div>
 {% endblock %}
