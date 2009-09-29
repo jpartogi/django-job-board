@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.translation import ugettext as _
 from django.template.defaultfilters import slugify
+from django.contrib.sitemaps import ping_google
 
 TYPE = (
         ('P', 'Permanent'),
@@ -17,8 +18,6 @@ class Job(models.Model):
     location = models.CharField(max_length=128)
     onsite_required = models.BooleanField(default=False)
     job_type = models.CharField(max_length=1, choices=TYPE)
-    #contact_email = models.EmailField()
-    #contact_person = models.CharField(max_length=128)
     to_apply = models.CharField(max_length=128)
     website = models.URLField(verify_exists=False, null=True, blank=True)
     company_name = models.CharField(max_length=128)
@@ -32,6 +31,13 @@ class Job(models.Model):
     def save(self):
         self.slug = slugify(self.title)
         super(Job, self).save()
+
+        try:
+             ping_google()
+        except Exception:
+             # Bare 'except' because we could get a variety
+             # of HTTP-related exceptions.
+             pass
 
     class Meta:
         ordering = ['-posted']

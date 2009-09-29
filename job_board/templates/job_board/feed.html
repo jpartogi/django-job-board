@@ -1,0 +1,13 @@
+<h2 class="title">{{ obj.title }} <span>at</span> {{ obj.company_name }}</h2>
+{% if obj.website %}<div><strong>Website:</strong> {{ obj.website|urlize }}</div>{% endif %}
+<div><strong>Type:</strong> {{ obj.get_job_type_display }}</div>
+
+{% if obj.onsite_required %}<div><strong>Required onsite</strong></div>{% endif %}
+
+<strong>Description:</strong>
+<div class="desc">
+{{ obj.description }}
+</div>
+
+<div><strong>Skills required:</strong> {{ obj.skills_required }}</div>
+<div><strong>To apply:</strong> {{ obj.to_apply|urlize }}</div>

@@ -2,8 +2,17 @@
 
 {% block content %}
 <div id="content">
-    <div id="form-link"><a href="{% url job-form %}">Add New Job</a> &raquo;</div>
-    <div style="clear:both"></div>
+    <div id="top-links">
+        <div id="feeds-link">
+            <a href="{% url job-feeds 'jobs' %}">
+                <img src="http://c0166731.cdn.cloudfiles.rackspacecloud.com/37.png"
+                     height="20" alt="jobs feeds"/>
+            </a>
+        </div>
+
+        <div id="form-link"><a href="{% url job-form %}">Add New Job</a> &raquo;</div>
+        <div style="clear:both"></div>
+    </div>
 
     <div id="job-list">
     {% for job in job_list %}

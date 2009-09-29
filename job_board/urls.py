@@ -1,10 +1,10 @@
 from django.conf.urls.defaults import *
 from django.views.generic import list_detail
 
-from job.models import Job
-from job.feeds import JobFeed
-from job.forms import JobForm
-from job.views import JobFormPreview
+from job_board.models import Job
+from job_board.feeds import JobFeed
+from job_board.forms import JobForm
+from job_board.views import JobFormPreview
 
 queryset = Job.objects.all()
 
@@ -14,14 +14,14 @@ feeds = {
 
 job_list_dict = {
     'queryset': queryset,
-    'template_name': 'job/list.html',
+    'template_name': 'job_board/list.html',
     'template_object_name': 'job',
     'paginate_by': 10,
 }
 
 job_detail_dict = {
     'queryset': queryset,
-    'template_name': 'job/view.html',
+    'template_name': 'job_board/view.html',
     'template_object_name': 'job'
 }
 
