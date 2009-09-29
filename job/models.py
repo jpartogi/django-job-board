@@ -16,10 +16,10 @@ class Job(models.Model):
     skills_required = models.CharField(max_length=50)
     location = models.CharField(max_length=128)
     onsite_required = models.BooleanField(default=False)
-    job_type = models.CharField(max_length=1,choices=TYPE)
+    job_type = models.CharField(max_length=1, choices=TYPE)
     contact_email = models.EmailField()
     contact_person = models.CharField(max_length=128)
-    website = models.URLField(null=True, blank=True)
+    website = models.URLField(verify_exists=False, null=True, blank=True)
     company_name = models.CharField(max_length=128)
 
     def __unicode__(self):

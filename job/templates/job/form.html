@@ -11,11 +11,11 @@
     </ul>
     {% endif %}
     
-    <form id="form" action="{{ request.path }}" method="POST">
+    <form id="form" action="." method="POST">
     {{ form.as_p }}
 
-    {{ html_captcha|safe }}
-    <input type="submit" value="Submit" />
+    <input type="submit" value="Preview" />
+    <input type="hidden" name="{{ stage_field }}" value="1" />
     </form>
 
     <div style="margin-top:1em">&laquo; <a href="{% url job-list %}">Back</a></div>
