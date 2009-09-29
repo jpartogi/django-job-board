@@ -26,9 +26,7 @@ job_detail_dict = {
 }
 
 urlpatterns = patterns('',
-    (r'^feed/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': feeds}, 'job-feeds'),
-	
-    (r'^create/$', 'job.views.create', {}, 'job-create'),
+    (r'^feed/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': feeds}, 'job-feeds'),	
     (r'^new/$', JobFormPreview(JobForm), {}, 'job-form'),
     (r'^(?P<slug>[\w-]+)/(?P<object_id>\d+)/$', list_detail.object_detail, dict(job_detail_dict), 'job-detail'),
     (r'^$', list_detail.object_list, dict(job_list_dict), 'job-list'), # This must be last after everything else has been evaluated

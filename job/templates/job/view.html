@@ -3,8 +3,15 @@
 {% block content %}
 <div id="content"> 
     <div style="margin-bottom:1em">&laquo; <a href="{% url job-list %}">Back</a></div>
+
+    {% if notifications %}
+    <ul id="notifications">
+        {% for notification in notifications %}<li class="{{ notification.type }}">{{ notification.content }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
     
-    <h2 id="title">{{ job.title }} <span>at</span> {{ job.company_name }}</h2>
+    <h2 class="title">{{ job.title }} <span>at</span> {{ job.company_name }}</h2>
     {% if job.website %}<div><strong>Website:</strong> {{ job.website|urlize }}</div>{% endif %}
     <div><strong>Type:</strong> {{ job.get_job_type_display }}</div>
 
@@ -15,7 +22,7 @@
     </div>
 
     <div><strong>Skills required:</strong> {{ job.skills_required }}</div>
-    <div><strong>Contact:</strong> {{ job.contact_person }} ({{ job.contact_email|urlize }})</div>
+    <div><strong>To apply:</strong> {{ job.to_apply|urlize }}</div>
 
     <div style="margin-top:1em">&laquo; <a href="{% url job-list %}">Back</a></div>
 </div>

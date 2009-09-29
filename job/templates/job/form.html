@@ -3,13 +3,6 @@
 {% block content %}
 <div id="content">
     <div style="margin-bottom:1em">&laquo; <a href="{% url job-list %}">Back</a></div>
-
-    {% if notifications %}
-    <ul id="notifications">
-        {% for notification in notifications %}<li class="{{ notification.type }}">{{ notification.content }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
     
     <form id="form" action="." method="POST">
     {{ form.as_p }}

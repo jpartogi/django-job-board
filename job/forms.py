@@ -10,4 +10,4 @@ class JobForm(ModelForm):
         model = Job
         fields = ('title', 'job_type', 'description', 'skills_required',
                   'company_name', 'location', 'onsite_required',
-                  'website', 'contact_person', 'contact_email')
+                  'website', 'to_apply')

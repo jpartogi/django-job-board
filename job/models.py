@@ -17,8 +17,9 @@ class Job(models.Model):
     location = models.CharField(max_length=128)
     onsite_required = models.BooleanField(default=False)
     job_type = models.CharField(max_length=1, choices=TYPE)
-    contact_email = models.EmailField()
-    contact_person = models.CharField(max_length=128)
+    #contact_email = models.EmailField()
+    #contact_person = models.CharField(max_length=128)
+    to_apply = models.CharField(max_length=128)
     website = models.URLField(verify_exists=False, null=True, blank=True)
     company_name = models.CharField(max_length=128)
 

@@ -1,37 +1,36 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div id="content">
+    
+    <h2 class="title">{{ form.title.data }} <span>at</span> {{ form.company_name.data }}</h2>
+    {% if form.website %}<div><strong>Website:</strong> {{ form.website.data|urlize }}</div>{% endif %}
+    <div><strong>Type:</strong> {{ form.job_type.data }}</div>
 
-<h1>Preview your submission</h1>
+    {% if form.onsite_required %}<div><strong>Required onsite</strong></div>{% endif %}
 
-<table>
-{% for field in form %}
-<tr>
-<th>{{ field.label }}:</th>
-<td>{{ field.data }}</td>
-</tr>
-{% endfor %}
-</table>
+    <div class="desc">
+    {{ form.description.data }}
+    </div>
 
-<p>Security hash: {{ hash_value }}</p>
+    <div><strong>Skills required:</strong> {{ form.skills_required.data }}</div>
+    <div><strong>To apply:</strong> {{ form.to_apply.data|urlize }}</div>
 
-<form action="{% url job-create %}" method="post">
-{% for field in form %}
-{{ field.as_hidden }}
-{% endfor %}
-<input type="hidden" name="{{ stage_field }}" value="2" />
-<input type="hidden" name="{{ hash_field }}" value="{{ hash_value }}" />
-<p><input type="submit" value="Submit" /></p>
-</form>
+    <form action="." method="post">
+        {% for field in form %}
+        {{ field.as_hidden }}
+        {% endfor %}
+        <input type="hidden" name="{{ stage_field }}" value="2" />
+        <input type="hidden" name="{{ hash_field }}" value="{{ hash_value }}" />
+        <p><input type="submit" value="Submit" /></p>
+    </form>
 
-<h1>Or edit it again</h1>
-
-<form action="." method="post">
-<table>
-{{ form }}
-</table>
-<input type="hidden" name="{{ stage_field }}" value="1" />
-<p><input type="submit" value="Preview" /></p>
-</form>
-
+    <h2 class="title" style="margin-top:1em">Edit</h2>
+    <form id="form" action="." method="post">
+        
+        {{ form.as_p }}
+        <input type="hidden" name="{{ stage_field }}" value="1" />
+        <p><input type="submit" value="Preview" /></p>
+    </form>
+</div>
 {% endblock %}
