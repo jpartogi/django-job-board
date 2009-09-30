@@ -3,6 +3,8 @@ from django.utils.translation import ugettext as _
 from django.template.defaultfilters import slugify
 from django.contrib.sitemaps import ping_google
 
+from tagging.models import Tag
+
 TYPE = (
         ('P', 'Permanent'),
         ('C', 'Contract'),
@@ -14,7 +16,7 @@ class Job(models.Model):
     slug = models.SlugField(max_length=50)
     description = models.TextField()
     posted = models.DateTimeField(auto_now_add=True)
-    skills_required = models.CharField(max_length=50)
+    skills_required = models.CharField(max_length=100)
     location = models.CharField(max_length=128)
     onsite_required = models.BooleanField(default=False)
     job_type = models.CharField(max_length=1, choices=TYPE)
@@ -32,6 +34,8 @@ class Job(models.Model):
         self.slug = slugify(self.title)
         super(Job, self).save()
 
+        self.tags = self.skills_required
+        
         try:
              ping_google()
         except Exception:
@@ -39,6 +43,14 @@ class Job(models.Model):
              # of HTTP-related exceptions.
              pass
 
+    def _get_tags(self):
+        return Tag.objects.get_for_object(self)
+
+    def _set_tags(self, tag_list):
+        Tag.objects.update_tags(self, tag_list)
+
+    tags = property(_get_tags, _set_tags)
+    
     class Meta:
         ordering = ['-posted']
         get_latest_by = 'posted'
