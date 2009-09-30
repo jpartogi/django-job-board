@@ -12,7 +12,7 @@ class JobFeed(Feed):
     description_template = 'job_board/feed.html'
 
     def items(self, obj):
-        return Job.objects.filter(posted__gt=days_range(30)).order_by('-posted')
+        return Job.objects.filter(posted__gt=days_range(30))
 
     def item_author_name(self, item):
         """
