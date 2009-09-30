@@ -12,16 +12,20 @@ TYPE = (
     )
 
 class Job(models.Model):
-    title = models.CharField(max_length=50, verbose_name=_('job title'))
+    title = models.CharField(max_length=50, verbose_name=_('job title'),
+             help_text=_('"Scrum Master" "Senior Rails Developer"'))
     slug = models.SlugField(max_length=50)
     description = models.TextField()
     posted = models.DateTimeField(auto_now_add=True)
-    skills_required = models.CharField(max_length=100)
-    location = models.CharField(max_length=128)
+    skills_required = models.CharField(max_length=100, 
+                help_text=_('Separated by comma: "Scrum, Lean, Ruby on Rails, Git"'))
+    location = models.CharField(max_length=128, help_text=_('"Sydney, Australia"'))
     onsite_required = models.BooleanField(default=False)
     job_type = models.CharField(max_length=1, choices=TYPE)
-    to_apply = models.CharField(max_length=128)
-    website = models.URLField(verify_exists=False, null=True, blank=True)
+    to_apply = models.CharField(max_length=128, verbose_name=_('how to apply'),
+                help_text=_('"Send email to John Doe (john.doe@company.com)"'))
+    website = models.URLField(verify_exists=False, null=True, blank=True,
+                help_text=_('"www.company.com"'))
     company_name = models.CharField(max_length=128)
 
     def __unicode__(self):

@@ -2,17 +2,14 @@
 
 {% block content %}
 <div id="content">
-    <div id="top-links">
-        <div id="feeds-link">
-            <a href="{% url job-feeds 'jobs' %}">
-                <img src="http://c0166731.cdn.cloudfiles.rackspacecloud.com/37.png"
-                     height="20" alt="jobs feeds"/>
-            </a>
-        </div>
-
-        <div id="form-link"><a href="{% url job-form %}">Add New Job</a> &raquo;</div>
-        <div style="clear:both"></div>
+    <div id="form-link">
+        <a href="{% url job-form %}">Post your Agile jobs for free here!</a> &raquo;
+        <br/>
+        Your job posting will be displayed for 30 days.
     </div>
+    <div style="clear:both"></div>
+    
+
 
     <div id="job-list">
     {% for job in job_list %}
@@ -30,5 +27,14 @@
         </div>
     {% endfor %}
     </div>
+
+    <div id="feeds-link">
+        <a href="{% url job-feeds 'jobs' %}">
+            <img src="http://c0166731.cdn.cloudfiles.rackspacecloud.com/37.png"
+                 height="20" alt="jobs feeds"/>
+        </a>
+        Get the latest job feeds
+    </div>
+    <div style="clear:both"></div>
 </div>
 {% endblock %}
