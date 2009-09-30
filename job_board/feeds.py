@@ -7,7 +7,7 @@ from commons.utils import days_range
 class JobFeed(Feed):
     feed_type = Atom1Feed
     title = "Job Feeds"
-    link = "/job/"
+    link = "/feed/jobs/"
     description = "Job Feeds"
     description_template = 'job_board/feed.html'
 
