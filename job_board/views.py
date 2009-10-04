@@ -37,6 +37,8 @@ def job_list_by_tag(request, tag_name=None):
                                     template_object_name= template_object_name)
 
 def job_list(request):
+    template = select_template(job_list_template) # returns Template object
+    template_name = template.name
     
     return list_detail.object_list(request, queryset, paginate_by=paginate_by,
                                     template_name = template_name,

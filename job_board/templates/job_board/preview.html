@@ -26,11 +26,23 @@
     </form>
 
     <h2 class="title" style="margin-top:1em">Edit</h2>
-    <form id="form" action="." method="post">
-        
-        {{ form.as_p }}
-        <input type="hidden" name="{{ stage_field }}" value="1" />
-        <p><input type="submit" value="Preview" /></p>
+    <form id="form" action="." method="POST">
+    {% for field in form %}
+
+        {% if field.errors %}
+            <ol class="errorlist">
+            {% for error in field.errors %}
+                <li><strong>{{ error|escape }}</strong></li>
+            {% endfor %}
+            </ol>
+        {% endif %}
+        <p {% ifequal field.name "honeypot" %} style="display:none;"{% endifequal %}>
+        {{ field.label_tag }} {{ field }} <span>{{ field.help_text }}</span>
+        </p>
+    {% endfor %}
+
+    <input type="submit" value="Preview" />
+    <input type="hidden" name="{{ stage_field }}" value="1" />
     </form>
 </div>
 {% endblock %}

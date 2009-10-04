@@ -1,11 +1,22 @@
 from django import forms
 from django.forms import ModelForm
+from django.utils.translation import ugettext_lazy as _
 
 from job_board.models import *
 
 class JobForm(ModelForm):
     description = forms.CharField(widget=forms.Textarea(attrs={'cols': 90, 'rows': 15}))
+    honeypot    = forms.CharField(required=False,
+                                label=_('If you enter anything in this field '\
+                                        'your comment will be treated as spam'))
 
+    def clean_honeypot(self):
+        """Check that nothing's been entered into the honeypot."""
+        value = self.cleaned_data["honeypot"]
+        if value:
+            raise forms.ValidationError(self.fields["honeypot"].label)
+        return value
+    
     class Meta:
         model = Job
         fields = ('title', 'job_type', 'description', 'skills_required',
