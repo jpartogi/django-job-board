@@ -3,21 +3,21 @@
 {% block content %}
 <div id="content">
     <div id="form-link">
-        <a href="{% url job-form %}">Post your Agile jobs for free here!</a> &raquo;
-        <br/>
+        <span style="background-color:yellow">
+            <a href="{% url job-form %}">Post your Agile jobs for free here!</a>
+        </span>&raquo; <br/>
         Your job posting will be displayed for 30 days.
     </div>
     <div style="clear:both"></div>
     
     <div>
+        <strong>Skills required</strong><br/>
         {% load tagging_tags %}{% load tag_list %}
         {% tag_cloud_for_model job_board.Job as tags with steps=5 distribution=log  %}
 
-        <ul>
         {% for tag in tags %}
-            <li>{% populate_tag tag %}</li>
+            {% populate_tag tag %}
         {% endfor %}
-        </ul>
     </div>
 
     <div id="job-list">
@@ -38,12 +38,15 @@
     </div>
 
     <div id="feeds-link">
-        <a href="{% url job-feeds 'jobs' %}">
-            <img src="http://c0166731.cdn.cloudfiles.rackspacecloud.com/37.png"
-                 height="20" alt="jobs feeds"/>
-        </a>
-        Get the latest job feeds
+        <span style="background-color:yellow">
+            <a href="{% url job-feeds 'jobs' %}">
+                Stay updated by subscribing to our job feeds
+            </a>
+        </span>
     </div>
+    <img src="http://c0166731.cdn.cloudfiles.rackspacecloud.com/rss_48.png"
+             height="25" alt="jobs feeds"/>
     <div style="clear:both"></div>
+
 </div>
 {% endblock %}
