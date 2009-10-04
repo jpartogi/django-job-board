@@ -22,6 +22,8 @@ job_list_template = (
 paginate_by = 10
 template_object_name = 'job'
 
+extra_context = {'base_template' : 'base.html'}
+
 def job_list_by_tag(request, tag_name=None):
 
     tag = get_object_or_404(Tag,name=tag_name)
@@ -34,6 +36,7 @@ def job_list_by_tag(request, tag_name=None):
 
     return list_detail.object_list(request, queryset, paginate_by=paginate_by,
                                     template_name = template_name,
+                                    extra_context = extra_context,
                                     template_object_name= template_object_name)
 
 def job_list(request):
@@ -42,6 +45,7 @@ def job_list(request):
     
     return list_detail.object_list(request, queryset, paginate_by=paginate_by,
                                     template_name = template_name,
+                                    extra_context = extra_context,
                                     template_object_name= template_object_name)
 
 def job_detail(request, slug=None, object_id=None):
@@ -56,6 +60,7 @@ def job_detail(request, slug=None, object_id=None):
 
     return list_detail.object_detail(request, queryset, object_id=object_id, slug=slug,
                                      template_name = template_name,
+                                     extra_context = extra_context,
                                      template_object_name= template_object_name)
 
 class JobFormPreview(FormPreview):

@@ -20,11 +20,29 @@ sitemaps = {
 }
 
 urlpatterns = patterns('',
-    url(r'^feed/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': feeds}, name='job-feeds'),
-    url(r'^sitemap.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}, name='job-sitemap'),
+    url(r'^feed/(?P<url>.*)/$',
+        'django.contrib.syndication.views.feed',
+        {'feed_dict': feeds},
+        name='job-feeds'),
+
+    url(r'^sitemap.xml$',
+        'django.contrib.sitemaps.views.sitemap',
+        {'sitemaps': sitemaps},
+        name='job-sitemap'),
     
-    url(r'^new/$', JobFormPreview(JobForm), name='job-form'),
-    url(r'^(?P<slug>[\w-]+)/(?P<object_id>\d+)/$', job_detail, name='job-detail'),
-    url(r'^tag/(?P<tag_name>[\w-]+)/$', job_list_by_tag, name='job-list-tag' ),
-    url(r'^$', job_list, name='job-list'), # This must be last after everything else has been evaluated
+    url(r'^new/$',
+        JobFormPreview(JobForm),
+        name='job-form'),
+
+    url(r'^(?P<slug>[\w-]+)/(?P<object_id>\d+)/$',
+        job_detail,
+        name='job-detail'),
+
+    url(r'^tag/(?P<tag_name>[\w-]+)/$',
+        job_list_by_tag,
+        name='job-list-tag' ),
+
+    url(r'^$',
+        job_list,
+        name='job-list'), # This must be last after everything else has been evaluated
 )

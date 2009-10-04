@@ -4,24 +4,7 @@
 <div id="content">
     <div style="margin-bottom:1em">&laquo; <a href="{% url job-list %}">Back</a></div>
     
-    <form id="form" action="." method="POST">
-    {% for field in form %}
-   
-        {% if field.errors %}
-            <ol class="errorlist">
-            {% for error in field.errors %}
-                <li><strong>{{ error|escape }}</strong></li>
-            {% endfor %}
-            </ol>
-        {% endif %}
-        <p {% ifequal field.name "honeypot" %} style="display:none;"{% endifequal %}>
-        {{ field.label_tag }} {{ field }} <span>{{ field.help_text }}</span>
-        </p>
-    {% endfor %}
-
-    <input type="submit" value="Preview" />
-    <input type="hidden" name="{{ stage_field }}" value="1" />
-    </form>
+    {% include 'job_board/base_form.html' %}
 
     <div style="margin-top:1em">&laquo; <a href="{% url job-list %}">Back</a></div>
 </div>
