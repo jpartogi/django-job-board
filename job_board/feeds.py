@@ -1,16 +1,23 @@
+from django.utils.translation import ugettext as _
+from django.contrib.sites.models import Site
 from django.contrib.syndication.feeds import Feed
-from django.utils.feedgenerator import Atom1Feed
 
 from job_board.models import Job
 from commons.utils import days_range
 
 class JobFeed(Feed):
-    feed_type = Atom1Feed
-    title = "Job Feeds"
-    link = "/feed/jobs/"
-    description = "Job Feeds"
     description_template = 'job_board/feed.html'
 
+    def title(self):
+        if not hasattr(self, '_site'):
+            self._site = Site.objects.get_current()
+        return _("%(site_name)s Job Feed") % dict(site_name=self._site.name)
+
+    def description(self):
+        if not hasattr(self, '_site'):
+            self._site = Site.objects.get_current()
+        return _("Latest jobs on %(site_name)s") % dict(site_name=self._site.name)
+    
     def items(self, obj):
         return Job.objects.filter(posted__gt=days_range(30))
 
@@ -27,3 +34,8 @@ class JobFeed(Feed):
         pubdate.
         """
         return item.posted
+
+    def link(self):
+        if not hasattr(self, '_site'):
+            self._site = Site.objects.get_current()
+        return "http://%s/" % (self._site.domain)
