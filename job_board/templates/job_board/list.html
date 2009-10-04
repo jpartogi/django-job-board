@@ -9,7 +9,16 @@
     </div>
     <div style="clear:both"></div>
     
+    <div>
+        {% load tagging_tags %}{% load tag_list %}
+        {% tag_cloud_for_model job_board.Job as tags with steps=5 distribution=log  %}
 
+        <ul>
+        {% for tag in tags %}
+            <li>{% populate_tag tag %}</li>
+        {% endfor %}
+        </ul>
+    </div>
 
     <div id="job-list">
     {% for job in job_list %}

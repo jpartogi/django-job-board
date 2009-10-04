@@ -5,7 +5,7 @@ from django.contrib.sitemaps import FlatPageSitemap, GenericSitemap
 from job_board.models import Job
 from job_board.feeds import JobFeed
 from job_board.forms import JobForm
-from job_board.views import JobFormPreview
+from job_board.views import JobFormPreview, job_list
 
 from commons.utils import days_range
 
@@ -39,5 +39,6 @@ urlpatterns = patterns('',
     
     (r'^new/$', JobFormPreview(JobForm), {}, 'job-form'),
     (r'^(?P<slug>[\w-]+)/(?P<object_id>\d+)/$', list_detail.object_detail, dict(job_detail_dict), 'job-detail'),
+    (r'^tag/(?P<tag_name>[\w-]+)/$', job_list, dict(job_list_dict) ),
     (r'^$', list_detail.object_list, dict(job_list_dict), 'job-list'), # This must be last after everything else has been evaluated
 )
