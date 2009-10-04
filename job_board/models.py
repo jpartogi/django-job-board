@@ -38,7 +38,10 @@ class Job(models.Model):
         self.slug = slugify(self.title)
         super(Job, self).save()
 
-        self.tags = self.skills_required
+        import string
+        skills_required = self.skills_required
+        skills_required = string.replace(skills_required, '#', 'Sharp')
+        self.tags = skills_required
         
         try:
              ping_google()
