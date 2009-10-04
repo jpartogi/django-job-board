@@ -1,8 +1,7 @@
-from django.db import models
 from django.template import Library, Node, Variable, VariableDoesNotExist
 from django.core.urlresolvers import reverse
 
-from job_board.views import job_list
+from job_board.views import job_list_by_tag
 
 register = Library()
 
@@ -27,7 +26,7 @@ class PopulateTagsNode(Node):
             _tag = self.tag_tag.resolve(context)
             _font_size = _tag.font_size + 10
             _font_weight = min(900,(300 + (_tag.font_size*100)))
-            _url = reverse(job_list, kwargs = {'tag_name' : _tag.name} )
+            _url = reverse(job_list_by_tag, kwargs = {'tag_name' : _tag.name} )
 
             return "<span style='font-size:%spx;font-weight:%s'><a href='%s'>%s</a></span>" % (_font_size,_font_weight,_url,_tag.name)
         except VariableDoesNotExist:

@@ -1,27 +1,60 @@
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from django.template.loader import select_template
 from django.contrib.formtools.preview import FormPreview
 from django.shortcuts import get_object_or_404
 from django.views.generic import list_detail
 
 from tagging.models import Tag, TaggedItem
 
+from commons.utils import days_range
+
 from job_board.models import *
 from job_board.forms import *
 
-def job_list(request, tag_name=None, queryset=None, paginate_by=None,
-        template_name=None, template_object_name=None):
+queryset = Job.objects.filter(posted__gt=days_range(30))
 
-    if tag_name != None:
-        tag = get_object_or_404(Tag,name=tag_name)
-        #queryset = TaggedItem.objects.get_by_model(Entry, tag) #TODO:  this causes bug
-        queryset = queryset.filter(skills_required__contains = tag_name) #temporary fix?
+job_list_template = (
+    "job_board/list.html",
+    "job_board/job_list.html",
+)
+
+paginate_by = 10
+template_object_name = 'job'
+
+def job_list_by_tag(request, tag_name=None):
+
+    tag = get_object_or_404(Tag,name=tag_name)
+    queryset = TaggedItem.objects.get_by_model(Job, tag)
 
     queryset.order_by('posted')
+
+    template = select_template(job_list_template) # returns Template object
+    template_name = template.name
+
+    return list_detail.object_list(request, queryset, paginate_by=paginate_by,
+                                    template_name = template_name,
+                                    template_object_name= template_object_name)
+
+def job_list(request):
     
     return list_detail.object_list(request, queryset, paginate_by=paginate_by,
                                     template_name = template_name,
                                     template_object_name= template_object_name)
+
+def job_detail(request, slug=None, object_id=None):
+    job_detail_template = (
+        "job_board/view.html",
+        "job_board/detail.html",
+        "job_board/job_detail.html",
+    )
+
+    template = select_template(job_detail_template)
+    template_name = template.name
+
+    return list_detail.object_detail(request, queryset, object_id=object_id, slug=slug,
+                                     template_name = template_name,
+                                     template_object_name= template_object_name)
 
 class JobFormPreview(FormPreview):
     preview_template = 'job_board/preview.html'
