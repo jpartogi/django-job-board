@@ -14,6 +14,7 @@ To install django-job-board on your django site, you need these two django appli
 Installation
 ------------
 To install django-job-board on your django site, you would need to do the following steps:
+
 1. Add django-job-board to your django project INSTALLED_APPS settings as such:
 ::
 
@@ -43,9 +44,9 @@ If not then you may add it as such:
 
 >>> python manage.py syncdb
 
-5. Add the job categories from django admin
+4. Add the job categories from django admin
 
-6. django-job-board should be available on your site now
+5. django-job-board should be available on your site now
 
 Template customization
 ----------------------
