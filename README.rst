@@ -2,6 +2,7 @@ django-job-board
 ================
 
 A django based pluggable job board application extracted from original Scrum8.com
+that is currently online at http://jobs.scrum8.com
 
 Dependencies:
 
