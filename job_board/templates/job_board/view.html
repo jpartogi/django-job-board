@@ -13,6 +13,7 @@
     
     <h2 class="title">{{ job.title }} <span>at</span> {{ job.company_name }}</h2>
     {% if job.website %}<div><strong>Website:</strong> {{ job.website|urlize }}</div>{% endif %}
+    <div><strong>Category:</strong> {{ job.category }}</div>
     <div><strong>Type:</strong> {{ job.get_job_type_display }}</div>
 
     {% if job.onsite_required %}<div><strong>Required onsite</strong></div>{% endif %}

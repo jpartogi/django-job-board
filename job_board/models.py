@@ -1,7 +1,9 @@
 from django.db import models
-from django.utils.translation import ugettext as _
 from django.template.defaultfilters import slugify
 from django.contrib.sitemaps import ping_google
+from django.utils.translation import ugettext as _
+from django.utils.safestring import mark_safe
+from django.utils.encoding import force_unicode
 
 from tagging.models import Tag
 
@@ -11,22 +13,38 @@ TYPE = (
         ('I', 'Internship'),
     )
 
+class JobCategory(models.Model):
+    name        = models.CharField(max_length=50)
+    description = models.TextField(null=True, blank=True)
+    slug        = models.SlugField(max_length=50)
+
+    def __unicode__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return "/category/%s/" % ( self.slug )
+
+    class Meta:
+        verbose_name_plural = _('categories')
+        ordering = ['name']
+        
 class Job(models.Model):
-    title = models.CharField(max_length=50, verbose_name=_('job title'),
-             help_text=_('"Scrum Master" "Senior Rails Developer"'))
-    slug = models.SlugField(max_length=50)
-    description = models.TextField()
-    posted = models.DateTimeField(auto_now_add=True)
+    title           = models.CharField(max_length=50, verbose_name=_('job title'),
+                      help_text=_('"Scrum Master" "Senior Rails Developer"'))
+    slug            = models.SlugField(max_length=50)
+    description     = models.TextField()
+    posted          = models.DateTimeField(auto_now_add=True)
     skills_required = models.CharField(max_length=100, 
-                help_text=_('Separated by comma: "Scrum, Lean, Ruby on Rails, Git"'))
-    location = models.CharField(max_length=128, help_text=_('"Sydney, Australia"'))
+                      help_text=_('Separated by comma: "Scrum, Lean, Ruby on Rails, Git"'))
+    location        = models.CharField(max_length=128, help_text=_('"Sydney, Australia"'))
     onsite_required = models.BooleanField(default=False)
-    job_type = models.CharField(max_length=1, choices=TYPE)
-    to_apply = models.CharField(max_length=128, verbose_name=_('how to apply'),
-                help_text=_('"Send email to John Doe (john.doe@company.com)"'))
-    website = models.URLField(verify_exists=False, null=True, blank=True,
-                help_text=_('"www.company.com"'))
-    company_name = models.CharField(max_length=128)
+    job_type        = models.CharField(max_length=1, choices=TYPE)
+    category        = models.ForeignKey(JobCategory, verbose_name=_('job category'))
+    to_apply        = models.CharField(max_length=128, verbose_name=_('how to apply'),
+                      help_text=_('"Send email to John Doe (john.doe@company.com)"'))
+    website         = models.URLField(verify_exists=False, null=True, blank=True,
+                      help_text=_('"www.company.com"'))
+    company_name    = models.CharField(max_length=128)
 
     def __unicode__(self):
         return self.title
@@ -34,13 +52,16 @@ class Job(models.Model):
     def get_absolute_url(self):
         return "/%s/%d/" % ( self.slug, self.id )
 
+    def escape(self, tag):
+        return mark_safe(force_unicode(tag).replace('#', 'Sharp'))
+
     def save(self):
         self.slug = slugify(self.title)
         super(Job, self).save()
 
-        import string
         skills_required = self.skills_required
-        skills_required = string.replace(skills_required, '#', 'Sharp')
+        skills_required = self.escape(skills_required)
+        
         self.tags = skills_required
         
         try:

@@ -66,12 +66,12 @@ def job_detail(request, slug=None, object_id=None):
 class JobFormPreview(FormPreview):
     preview_template = 'job_board/preview.html'
     form_template = 'job_board/form.html'
-    
+        
     def done(self, request, cleaned_data):
-        form = JobForm(cleaned_data)
+        form = JobForm(request.POST)
         job = form.save()
-        params = {'slug': job.slug, 'object_id': job.id}
         
         request.notifications.create('Your job posting has been saved successfully. Thank you very much.', 'success')
 
+        params = {'slug': job.slug, 'object_id': job.id}
         return HttpResponseRedirect(reverse('job-detail', kwargs=params))

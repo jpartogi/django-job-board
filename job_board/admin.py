@@ -1,7 +1,12 @@
 from django.contrib import admin
 
-from job_board.models import Job
+from job_board.models import Job, JobCategory
 
+class JobCategoryAdmin(admin.ModelAdmin):
+    search_fields = ('name',)
+    prepopulated_fields = {"slug": ("name",)}
+    list_display = ('name', 'description', 'slug')
+    
 class JobAdmin(admin.ModelAdmin):
     date_hierarchy = 'posted'
     search_fields = ['title', 'description']
@@ -17,3 +22,4 @@ class JobAdmin(admin.ModelAdmin):
     )
         
 admin.site.register(Job, JobAdmin)
+admin.site.register(JobCategory, JobCategoryAdmin)

@@ -5,7 +5,12 @@
     
     <h2 class="title">{{ form.title.data }} <span>at</span> {{ form.company_name.data }}</h2>
     {% if form.website %}<div><strong>Website:</strong> {{ form.website.data|urlize }}</div>{% endif %}
-    <div><strong>Type:</strong> {{ form.job_type.data }}</div>
+    <div><strong>Category:</strong> {{ form.cleaned_data.category }}</div>
+    <div><strong>Type:</strong> 
+        {% ifequal form.cleaned_data.job_type 'P' %}Permanent{% endifequal %}
+        {% ifequal form.cleaned_data.job_type 'C' %}Contract{% endifequal %}
+        {% ifequal form.cleaned_data.job_type 'I' %}Internship{% endifequal %}
+    </div>
 
     {% if form.onsite_required %}<div><strong>Required onsite</strong></div>{% endif %}
 

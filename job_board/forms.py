@@ -19,6 +19,6 @@ class JobForm(ModelForm):
     
     class Meta:
         model = Job
-        fields = ('title', 'job_type', 'description', 'skills_required',
-                  'company_name', 'location', 'onsite_required',
-                  'website', 'to_apply')
+        fields = ('title', 'category', 'job_type', 'description', 
+                  'skills_required', 'company_name', 'location',
+                  'onsite_required', 'website', 'to_apply')
