@@ -5,7 +5,7 @@
 
 {% block content %}
 <div id="content"> 
-    <div style="margin-bottom:1em">&laquo; <a href="{% url job-list %}">Back</a></div>
+    <div style="margin-bottom:1em">&laquo; <a href="{% url job-list %}">{% trans 'Back' %}</a></div>
 
     {% if notifications %}
     <ul id="notifications">
@@ -14,18 +14,20 @@
     </ul>
     {% endif %}
     
-    <h2 class="title">{{ job.title }} <span>at</span> {{ job.company_name }}</h2>
-    {% if job.website %}<div><strong>Website:</strong> {{ job.website|urlize }}</div>{% endif %}
-    <div><strong>Category:</strong>&nbsp;{{ job.category }}</div>
-    <div><strong>Type:</strong>&nbsp;{{ job.get_job_type_display }}</div>
-    <div><strong>Location:</strong>&nbsp;{{ job.location }}&nbsp;{% if job.onsite_required %}(Required onsite){% endif %}</div>
+    <h2 class="title">{{ job.title }}<span>&nbsp;{% trans 'at' %}</span>&nbsp;{{ job.company_name }}</h2>
+    {% if job.website %}<div><strong>{% trans 'Website' %}:</strong> {{ job.website|urlize }}</div>{% endif %}
+    <div><strong>{% trans 'Category' %}:</strong>&nbsp;{{ job.category }}</div>
+    <div><strong>{% trans 'Type' %}:</strong>&nbsp;{{ job.get_job_type_display }}</div>
+    <div><strong>{% trans 'Location' %}:</strong>&nbsp;
+        {{ job.location }}&nbsp;{% if job.onsite_required %}({% trans 'Required onsite' %}){% endif %}
+    </div>
 
     <div class="desc">
     {% autoescape on %}{{ job.description|markdown }}{% endautoescape %}
     </div>
 
-    <div><strong>To apply:</strong> {{ job.to_apply|urlize }}</div>
+    <div><strong>{% trans 'To apply' %}:</strong> {{ job.to_apply|urlize }}</div>
 
-    <div style="margin-top:1em">&laquo; <a href="{% url job-list %}">Back</a></div>
+    <div style="margin-top:1em">&laquo; <a href="{% url job-list %}">{% trans 'Back' %}</a></div>
 </div>
 {% endblock %}

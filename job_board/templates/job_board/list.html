@@ -16,7 +16,7 @@
     {% for job in job_list %}
         <div class="block {% cycle 'odd' 'even' %}">
             <strong>{{ job.location }}</strong>: <a href='{{ job.get_absolute_url }}'>{{ job.title }}</a>
-            <span class="small">at</span>
+            <span class="small">{% trans 'at' %}</span>
             
             {% if job.website %} 
             <a href="{{ job.website }}">{{ job.company_name }}</a>
@@ -24,7 +24,7 @@
             {{ job.company_name }}
             {% endif %}
 
-            <span class="small"><em>posted</em> {{ job.posted|timesince }} <em>ago</em></span>
+            <span class="small"><em>{% trans 'posted' %}</em> {{ job.posted|timesince }} <em>ago</em></span>
         </div>
     {% endfor %}
     </div>

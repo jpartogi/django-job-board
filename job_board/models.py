@@ -2,15 +2,13 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.contrib.sitemaps import ping_google
 from django.utils.translation import ugettext as _
-from django.utils.safestring import mark_safe
-from django.utils.encoding import force_unicode
 
 from tagging.models import Tag
 
 TYPE = (
-        ('P', 'Permanent'),
-        ('C', 'Contract'),
-        ('I', 'Internship'),
+        ('P', _('Permanent')),
+        ('C', _('Contract')),
+        ('I', _('Internship')),
     )
 
 class JobCategory(models.Model):
@@ -39,7 +37,7 @@ class Job(models.Model):
     job_type        = models.CharField(max_length=1, choices=TYPE)
     category        = models.ForeignKey(JobCategory, verbose_name=_('job category'))
     to_apply        = models.CharField(max_length=128, verbose_name=_('how to apply'),
-                      help_text=_('"Send email to John Doe (john.doe@company.com)"'))
+                      help_text=_('"Send your resume to John Doe (john.doe@company.com)"'))
     website         = models.URLField(verify_exists=False, null=True, blank=True,
                       help_text=_('"www.company.com"'))
     company_name    = models.CharField(max_length=128)
@@ -49,9 +47,6 @@ class Job(models.Model):
 
     def get_absolute_url(self):
         return "/%s/%d/" % ( self.slug, self.id )
-
-    def escape(self, tag):
-        return mark_safe(force_unicode(tag).replace('#', 'Sharp'))
 
     def save(self):
         self.slug = slugify(self.title)

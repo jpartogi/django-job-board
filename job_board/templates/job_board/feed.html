@@ -1,13 +1,15 @@
 {% load markup %}
+{% load i18n %}
 
-<h2 class="title">{{ obj.title }} <span>at</span>&nbsp;{{ obj.company_name }}</h2>
-{% if obj.website %}<div><strong>Website:</strong>&nbsp;{{ obj.website|urlize }}</div>{% endif %}
-<div><strong>Type:</strong>&nbsp;{{ obj.get_job_type_display }}</div>
-<div><strong>Location:</strong>&nbsp;{{ obj.location }}&nbsp;{% if obj.onsite_required %}(Required onsite){% endif %}</div>
+<h2 class="title">{{ obj.title }} <span>{% trans 'at' %}</span>&nbsp;{{ obj.company_name }}</h2>
+{% if obj.website %}<div><strong>{% trans 'Website' %}:</strong>&nbsp;{{ obj.website|urlize }}</div>{% endif %}
+<div><strong>{% trans 'Type' %}:</strong>&nbsp;{{ obj.get_job_type_display }}</div>
+<div><strong>{% trans 'Location' %}:</strong>&nbsp;{{ obj.location }}&nbsp;
+    {% if obj.onsite_required %}({% trans 'Required onsite' %}){% endif %}</div>
 
-<strong>Description:</strong>
+<strong>{% trans 'Description' %}:</strong>
 <div class="desc">
 {{ obj.description|markdown }}
 </div>
 
-<div><strong>To apply:</strong> {{ obj.to_apply|urlize }}</div>
+<div><strong>{% trans 'To apply' %}:</strong> {{ obj.to_apply|urlize }}</div>

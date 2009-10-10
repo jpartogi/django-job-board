@@ -6,22 +6,23 @@
 {% block content %}
 <div id="content">
     
-    <h2 class="title">{{ form.title.data }} <span>at</span> {{ form.company_name.data }}</h2>
-    {% if form.website %}<div><strong>Website:</strong> {{ form.website.data|urlize }}</div>{% endif %}
-    <div><strong>Category:</strong> {{ form.cleaned_data.category }}</div>
-    <div><strong>Type:</strong> 
-        {% ifequal form.cleaned_data.job_type 'P' %}Permanent{% endifequal %}
-        {% ifequal form.cleaned_data.job_type 'C' %}Contract{% endifequal %}
-        {% ifequal form.cleaned_data.job_type 'I' %}Internship{% endifequal %}
+    <h2 class="title">{{ form.title.data }} <span>{% trans 'at' %}</span> {{ form.company_name.data }}</h2>
+    {% if form.website %}<div><strong>{% trans 'Website' %}:</strong> {{ form.website.data|urlize }}</div>{% endif %}
+    <div><strong>{% trans 'Category' %}:</strong> {{ form.cleaned_data.category }}</div>
+    <div><strong>{% trans 'Type' %}:</strong>
+        {% ifequal form.cleaned_data.job_type 'P' %}{% trans 'Permanent' %}{% endifequal %}
+        {% ifequal form.cleaned_data.job_type 'C' %}{% trans 'Contract' %}{% endifequal %}
+        {% ifequal form.cleaned_data.job_type 'I' %}{% trans 'Internship' %}{% endifequal %}
     </div>
 
-    <div><strong>Location:</strong>&nbsp;{{ form.location.data }}&nbsp;{% if form.onsite_required %}(Required onsite){% endif %}</div>
+    <div><strong>{% trans 'Location' %}:</strong>&nbsp;{{ form.location.data }}&nbsp;
+        {% if form.onsite_required %}({% trans 'Required onsite' %}){% endif %}</div>
 
     <div class="desc">
     {% autoescape on %}{{ form.description.data|markdown }}{% endautoescape %}
     </div>
 
-    <div><strong>To apply:</strong> {{ form.to_apply.data|urlize }}</div>
+    <div><strong>{% trans 'To apply' %}:</strong> {{ form.to_apply.data|urlize }}</div>
 
     <form action="." method="post">
         {% for field in form %}
@@ -32,7 +33,7 @@
         <p><input type="submit" value="Submit" /></p>
     </form>
 
-    <h2 class="title" style="margin-top:1em">Edit</h2>
+    <h2 class="title" style="margin-top:1em">{% trans 'Edit' %}</h2>
     {% include 'job_board/base_form.html' %}
     
 </div>
