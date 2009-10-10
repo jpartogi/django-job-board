@@ -5,7 +5,8 @@ from django.utils.translation import ugettext_lazy as _
 from job_board.models import *
 
 class JobForm(ModelForm):
-    description = forms.CharField(widget=forms.Textarea(attrs={'cols': 90, 'rows': 15}))
+    description = forms.CharField(widget=forms.Textarea(attrs={'cols': 90, 'rows': 15}),
+                    help_text=_('Markdown syntax is allowed'))
     honeypot    = forms.CharField(required=False,
                                 label=_('If you enter anything in this field '\
                                         'your comment will be treated as spam'))
@@ -20,5 +21,5 @@ class JobForm(ModelForm):
     class Meta:
         model = Job
         fields = ('title', 'category', 'job_type', 'description', 
-                  'skills_required', 'company_name', 'location',
+                  'company_name', 'location',
                   'onsite_required', 'website', 'to_apply')

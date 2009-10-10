@@ -15,7 +15,7 @@ class JobAdmin(admin.ModelAdmin):
     list_filter = ['posted', 'job_type', 'category', 'onsite_required']
     fieldsets = (
         ('Job Information', {
-            'fields': ('title', 'slug', 'job_type', 'category', 'description', 'skills_required', ('location', 'onsite_required')),
+            'fields': ('title', 'slug', 'job_type', 'category', 'description', ('location', 'onsite_required')),
         }),
         ('Company Information', {
             'fields': ('company_name', ('to_apply'), 'website'),

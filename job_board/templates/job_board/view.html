@@ -1,4 +1,5 @@
 {% extends base_template %}
+{% load markup %}
 
 {% block content %}
 <div id="content"> 
@@ -13,16 +14,14 @@
     
     <h2 class="title">{{ job.title }} <span>at</span> {{ job.company_name }}</h2>
     {% if job.website %}<div><strong>Website:</strong> {{ job.website|urlize }}</div>{% endif %}
-    <div><strong>Category:</strong> {{ job.category }}</div>
-    <div><strong>Type:</strong> {{ job.get_job_type_display }}</div>
-
-    {% if job.onsite_required %}<div><strong>Required onsite</strong></div>{% endif %}
+    <div><strong>Category:</strong>&nbsp;{{ job.category }}</div>
+    <div><strong>Type:</strong>&nbsp;{{ job.get_job_type_display }}</div>
+    <div><strong>Location:</strong>&nbsp;{{ job.location }}&nbsp;{% if job.onsite_required %}(Required onsite){% endif %}</div>
 
     <div class="desc">
-    {% autoescape on %} {{ job.description|linebreaksbr }}{% endautoescape %}
+    {% autoescape on %}{{ job.description|markdown }}{% endautoescape %}
     </div>
 
-    <div><strong>Skills required:</strong> {{ job.skills_required }}</div>
     <div><strong>To apply:</strong> {{ job.to_apply|urlize }}</div>
 
     <div style="margin-top:1em">&laquo; <a href="{% url job-list %}">Back</a></div>

@@ -30,12 +30,10 @@ class JobCategory(models.Model):
         
 class Job(models.Model):
     title           = models.CharField(max_length=50, verbose_name=_('job title'),
-                      help_text=_('"Scrum Master" "Senior Rails Developer"'))
+                      help_text=_('"Scrum Master", "Senior Rails Developer"'))
     slug            = models.SlugField(max_length=50)
     description     = models.TextField()
     posted          = models.DateTimeField(auto_now_add=True)
-    skills_required = models.CharField(max_length=100, 
-                      help_text=_('Separated by comma: "Scrum, Lean, Ruby on Rails, Git"'))
     location        = models.CharField(max_length=128, help_text=_('"Sydney, Australia"'))
     onsite_required = models.BooleanField(default=False)
     job_type        = models.CharField(max_length=1, choices=TYPE)
@@ -58,11 +56,6 @@ class Job(models.Model):
     def save(self):
         self.slug = slugify(self.title)
         super(Job, self).save()
-
-        skills_required = self.skills_required
-        skills_required = self.escape(skills_required)
-        
-        self.tags = skills_required
         
         try:
              ping_google()

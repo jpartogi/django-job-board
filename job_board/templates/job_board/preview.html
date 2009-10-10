@@ -12,13 +12,12 @@
         {% ifequal form.cleaned_data.job_type 'I' %}Internship{% endifequal %}
     </div>
 
-    {% if form.onsite_required %}<div><strong>Required onsite</strong></div>{% endif %}
+    <div><strong>Location:</strong>&nbsp;{{ form.location.data }}&nbsp;{% if form.onsite_required %}(Required onsite){% endif %}</div>
 
     <div class="desc">
     {% autoescape on %}{{ form.description.data|linebreaksbr }}{% endautoescape %}
     </div>
 
-    <div><strong>Skills required:</strong> {{ form.skills_required.data }}</div>
     <div><strong>To apply:</strong> {{ form.to_apply.data|urlize }}</div>
 
     <form action="." method="post">
