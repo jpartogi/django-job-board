@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 
+{% load markup %}
+{% load i18n %}
+
 {% block content %}
 <div id="content">
     
@@ -15,7 +18,7 @@
     <div><strong>Location:</strong>&nbsp;{{ form.location.data }}&nbsp;{% if form.onsite_required %}(Required onsite){% endif %}</div>
 
     <div class="desc">
-    {% autoescape on %}{{ form.description.data|linebreaksbr }}{% endautoescape %}
+    {% autoescape on %}{{ form.description.data|markdown }}{% endautoescape %}
     </div>
 
     <div><strong>To apply:</strong> {{ form.to_apply.data|urlize }}</div>
