@@ -19,7 +19,7 @@
     {% if job.onsite_required %}<div><strong>Required onsite</strong></div>{% endif %}
 
     <div class="desc">
-    {{ job.description }}
+    {% autoescape on %} {{ job.description|linebreaksbr }}{% endautoescape %}
     </div>
 
     <div><strong>Skills required:</strong> {{ job.skills_required }}</div>

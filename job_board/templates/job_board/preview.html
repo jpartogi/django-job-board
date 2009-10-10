@@ -15,7 +15,7 @@
     {% if form.onsite_required %}<div><strong>Required onsite</strong></div>{% endif %}
 
     <div class="desc">
-    {{ form.description.data }}
+    {% autoescape on %}{{ form.description.data|linebreaksbr }}{% endautoescape %}
     </div>
 
     <div><strong>Skills required:</strong> {{ form.skills_required.data }}</div>
