@@ -16,7 +16,7 @@ class JobFeed(Feed):
     def description(self):
         if not hasattr(self, '_site'):
             self._site = Site.objects.get_current()
-        return _("Latest jobs on %(site_name)s") % dict(site_name=self._site.name)
+        return _("Latest job postings on %(site_name)s") % dict(site_name=self._site.name)
     
     def items(self, obj):
         return Job.objects.filter(posted__gt=days_range(30))
