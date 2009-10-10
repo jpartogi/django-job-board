@@ -1,0 +1,80 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-10-10 15:55+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: feeds.py:14
+#, python-format
+msgid "%(site_name)s Job Feed"
+msgstr ""
+
+#: feeds.py:19
+#, python-format
+msgid "Latest jobs on %(site_name)s"
+msgstr ""
+
+#: forms.py:9
+msgid "Markdown syntax is allowed"
+msgstr ""
+
+#: forms.py:11
+msgid ""
+"If you enter anything in this field your comment will be treated as spam"
+msgstr ""
+
+#: models.py:28
+msgid "categories"
+msgstr ""
+
+#: models.py:32
+msgid "job title"
+msgstr ""
+
+#: models.py:33
+msgid "\"Scrum Master\" \"Senior Rails Developer\""
+msgstr ""
+
+#: models.py:37
+msgid "\"Sydney, Australia\""
+msgstr ""
+
+#: models.py:40
+msgid "job category"
+msgstr ""
+
+#: models.py:41
+msgid "how to apply"
+msgstr ""
+
+#: models.py:42
+msgid "\"Send email to John Doe (john.doe@company.com)\""
+msgstr ""
+
+#: models.py:44
+msgid "\"www.company.com\""
+msgstr ""
+
+#: templates/job_board/list.html:9
+msgid "Post your Agile jobs for free here!"
+msgstr ""
+
+#: templates/job_board/list.html:11
+msgid "Your job posting will be displayed for 30 days."
+msgstr ""
+
+#: templates/job_board/list.html:35
+msgid "Stay updated by subscribing to our job feeds"
+msgstr ""
