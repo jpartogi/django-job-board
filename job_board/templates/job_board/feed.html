@@ -1,12 +1,13 @@
-<h2 class="title">{{ obj.title }} <span>at</span> {{ obj.company_name }}</h2>
-{% if obj.website %}<div><strong>Website:</strong> {{ obj.website|urlize }}</div>{% endif %}
-<div><strong>Type:</strong> {{ obj.get_job_type_display }}</div>
+{% load markup %}
 
-{% if obj.onsite_required %}<div><strong>Required onsite</strong></div>{% endif %}
+<h2 class="title">{{ obj.title }} <span>at</span>&nbsp;{{ obj.company_name }}</h2>
+{% if obj.website %}<div><strong>Website:</strong>&nbsp;{{ obj.website|urlize }}</div>{% endif %}
+<div><strong>Type:</strong>&nbsp;{{ obj.get_job_type_display }}</div>
+<div><strong>Location:</strong>&nbsp;{{ obj.location }}&nbsp;{% if obj.onsite_required %}(Required onsite){% endif %}</div>
 
 <strong>Description:</strong>
 <div class="desc">
-{{ obj.description }}
+{{ obj.description|markdown }}
 </div>
 
 <div><strong>To apply:</strong> {{ obj.to_apply|urlize }}</div>

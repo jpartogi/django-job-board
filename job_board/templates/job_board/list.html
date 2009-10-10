@@ -1,12 +1,14 @@
 {% extends base_template %}
 
+{% load i18n %}
+
 {% block content %}
 <div id="content">
-    <div id="form-link">
-        <span style="background-color:yellow">
-            <a href="{% url job-form %}">Post your Agile jobs for free here!</a>
-        </span>&raquo; <br/>
-        Your job posting will be displayed for 30 days.
+    <div id="form-link-wrapper">
+        <span id="form-link">
+            <a href="{% url job-form %}">{% trans 'Post your Agile jobs for free here!' %}</a></span>
+        <br/>
+        {% trans 'Your job posting will be displayed for 30 days.' %}
     </div>
     <div style="clear:both"></div>    
 
@@ -27,16 +29,12 @@
     {% endfor %}
     </div>
 
-    <div id="feeds-link">
-        <span style="background-color:yellow;">
+    <div id="feeds-link-wrapper">
+        <span id="feeds-link">
             <a href="{% url job-feeds 'jobs' %}" >
-                Stay updated by subscribing to our job feeds
+                {% trans 'Stay updated by subscribing to our job feeds' %}
             </a>
         </span>
     </div>
-    <img src="http://c0166731.cdn.cloudfiles.rackspacecloud.com/rss_48.png"
-             height="25" alt="jobs feeds"/>
-    <div style="clear:both"></div>
-
 </div>
 {% endblock %}

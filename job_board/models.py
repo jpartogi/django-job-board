@@ -30,7 +30,7 @@ class JobCategory(models.Model):
         
 class Job(models.Model):
     title           = models.CharField(max_length=50, verbose_name=_('job title'),
-                      help_text=_('"Scrum Master", "Senior Rails Developer"'))
+                      help_text=_('"Scrum Master" "Senior Rails Developer"'))
     slug            = models.SlugField(max_length=50)
     description     = models.TextField()
     posted          = models.DateTimeField(auto_now_add=True)
