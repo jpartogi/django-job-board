@@ -1,7 +1,7 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Bahasa Indonesia translation for django-job-board.
+# Copyright (c) 2009 Scrum8.com
+# This file is distributed under the same license as the django-job-board package.
+# Scrum8.com <joshua.partogi@gmail.com>, 2009.
 #
 #, fuzzy
 msgid ""
