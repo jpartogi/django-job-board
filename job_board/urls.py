@@ -4,7 +4,7 @@ from django.contrib.sitemaps import FlatPageSitemap, GenericSitemap
 from job_board.models import Job
 from job_board.feeds import JobFeed
 from job_board.forms import JobForm
-from job_board.views import JobFormPreview, job_list_by_tag, job_list, job_detail
+from job_board.views import JobFormPreview, job_list, job_detail
 
 feeds = {
     'jobs': JobFeed,
