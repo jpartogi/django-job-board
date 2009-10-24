@@ -1,9 +1,9 @@
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.contrib.sitemaps import ping_google
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 
-from tagging.models import Tag
+from job_board.manager import JobManager
 
 TYPE = (
         ('P', _('Permanent')),
@@ -28,11 +28,11 @@ class JobCategory(models.Model):
         
 class Job(models.Model):
     title           = models.CharField(max_length=50, verbose_name=_('job title'),
-                      help_text=_('"Scrum Master" "Senior Rails Developer"'))
+                      help_text=_('job title'))
     slug            = models.SlugField(max_length=50)
     description     = models.TextField()
     posted          = models.DateTimeField(auto_now_add=True)
-    location        = models.CharField(max_length=128, help_text=_('"Sydney, Australia"'))
+    location        = models.CharField(max_length=128, help_text=_('job location'))
     onsite_required = models.BooleanField(default=False)
     job_type        = models.CharField(max_length=1, choices=TYPE)
     category        = models.ForeignKey(JobCategory, verbose_name=_('job category'))
@@ -42,11 +42,13 @@ class Job(models.Model):
                       help_text=_('"www.company.com"'))
     company_name    = models.CharField(max_length=128)
 
+    objects = JobManager()
+
     def __unicode__(self):
         return self.title
 
     def get_absolute_url(self):
-        return "/%s/%d/" % ( self.slug, self.id )
+        return "/%d/%s/" % ( self.id, self.slug )
 
     def save(self):
         self.slug = slugify(self.title)
@@ -58,14 +60,6 @@ class Job(models.Model):
              # Bare 'except' because we could get a variety
              # of HTTP-related exceptions.
              pass
-
-    def _get_tags(self):
-        return Tag.objects.get_for_object(self)
-
-    def _set_tags(self, tag_list):
-        Tag.objects.update_tags(self, tag_list)
-
-    tags = property(_get_tags, _set_tags)
     
     class Meta:
         ordering = ['-posted']

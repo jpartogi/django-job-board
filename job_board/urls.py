@@ -1,16 +1,17 @@
 from django.conf.urls.defaults import *
 from django.contrib.sitemaps import FlatPageSitemap, GenericSitemap
 
+from job_board.models import Job
 from job_board.feeds import JobFeed
 from job_board.forms import JobForm
-from job_board.views import JobFormPreview, job_list_by_tag, job_list, job_detail, queryset
+from job_board.views import JobFormPreview, job_list_by_tag, job_list, job_detail
 
 feeds = {
     'jobs': JobFeed,
 }
 
 info_dict = {
-    'queryset': queryset,
+    'queryset': Job.objects.filter(),
     'date_field': 'posted'
 }
 
@@ -34,7 +35,7 @@ urlpatterns = patterns('',
         JobFormPreview(JobForm),
         name='job-form'),
 
-    url(r'^(?P<slug>[\w-]+)/(?P<object_id>\d+)/$',
+    url(r'^(?P<object_id>\d+)/(?P<slug>[\w-]+)/$',
         job_detail,
         name='job-detail'),
 

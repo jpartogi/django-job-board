@@ -44,7 +44,7 @@ msgid "job title"
 msgstr ""
 
 #: models.py:33
-msgid "\"Scrum Master\" \"Senior Rails Developer\""
+msgid "\"Scrum Master\" \"Ruby on Rails Developer\""
 msgstr ""
 
 #: models.py:37

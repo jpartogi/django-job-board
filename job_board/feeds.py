@@ -3,7 +3,6 @@ from django.contrib.sites.models import Site
 from django.contrib.syndication.feeds import Feed
 
 from job_board.models import Job
-from commons.utils import days_range
 
 class JobFeed(Feed):
     description_template = 'job_board/feed.html'
@@ -19,7 +18,7 @@ class JobFeed(Feed):
         return _("Latest job postings on %(site_name)s") % dict(site_name=self._site.name)
     
     def items(self, obj):
-        return Job.objects.filter(posted__gt=days_range(30))
+        return Job.objects.filter()
 
     def item_author_name(self, item):
         """

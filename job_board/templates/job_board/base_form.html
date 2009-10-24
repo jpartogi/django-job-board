@@ -11,10 +11,27 @@
             </ol>
         {% endif %}
         <p {% ifequal field.name "honeypot" %} style="display:none;"{% endifequal %}>
-        {{ field.label_tag }} {{ field }} <span>{{ field.help_text }}</span>
+        {% ifequal field.name "onsite_required" %}
+        {{ field }} <label class="inline">{{ field.label }}</label>
+        {% else %}
+            {{ field.label_tag }} {{ field }}
+        {% endifequal %}
+            <span>                
+                {% ifequal field.help_text "job title" %}
+                    {% trans '"Ruby on Rails Developer"' %}
+                {% else %}
+                    {% ifnotequal field.help_text "job location" %}
+                    {{ field.help_text }}
+                    {% endifnotequal %}
+                {% endifequal %}
+
+                {% ifequal field.help_text "job location" %}
+                    {% trans '"San Fransisco, CA"' %}
+                {% endifequal %}
+            </span>
         </p>
     {% endfor %}
 
-    <input type="submit" value="Preview" />
+    <input type="submit" value="{% trans 'Preview' %}" />
     <input type="hidden" name="{{ stage_field }}" value="1" />
 </form>

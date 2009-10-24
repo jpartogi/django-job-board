@@ -8,7 +8,6 @@ Dependencies
 ------------
 To install django-job-board on your django site, you need these two django applications:
 
-#. django-tagging: http://code.google.com/p/django-tagging/
 #. django-commons: http://github.com/scrum8/django-commons/
 
 Installation
@@ -22,7 +21,6 @@ To install django-job-board on your django site, you would need to do the follow
     ...
     'job_board',
     'commons',
-    'tagging',
   )
 
 If you already have django-commons and django-tagging installed, then you don't need to
@@ -52,7 +50,7 @@ Template customization
 ----------------------
 You may customize and override django-job-board according to your needs.
 In your django-project's TEMPLATE_DIRS you may add 'job_board' directory underneath it.
-The templates that should exists is:
+The templates that should exist under this directory are:
 
 #. form.html        : This is the template for the add new job
 #. base_form.html   : This is the actual form that is shared between form.html and preview.html
