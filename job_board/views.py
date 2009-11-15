@@ -5,8 +5,6 @@ from django.contrib.formtools.preview import FormPreview
 from django.shortcuts import get_object_or_404
 from django.views.generic import list_detail
 
-from tagging.models import Tag, TaggedItem
-
 from job_board.models import *
 from job_board.forms import *
 
@@ -21,22 +19,6 @@ paginate_by = 10
 template_object_name = 'job'
 
 extra_context = {'base_template' : 'base.html'}
-
-#Not used anymore TODO: Remove this
-def job_list_by_tag(request, tag_name=None):
-
-    tag = get_object_or_404(Tag,name=tag_name)
-    queryset = TaggedItem.objects.get_by_model(Job, tag)
-
-    queryset.order_by('posted')
-
-    template = select_template(job_list_template) # returns Template object
-    template_name = template.name
-
-    return list_detail.object_list(request, queryset, paginate_by=paginate_by,
-                                    template_name = template_name,
-                                    extra_context = extra_context,
-                                    template_object_name= template_object_name)
 
 def job_list(request):
     template = select_template(job_list_template) # returns Template object
