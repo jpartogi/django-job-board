@@ -3,9 +3,10 @@ from django.forms import ModelForm
 from django.utils.translation import ugettext_lazy as _
 
 from job_board.models import *
+from wmd.widgets import MarkDownInput
 
 class JobForm(ModelForm):
-    description = forms.CharField(widget=forms.Textarea(attrs={'cols': 90, 'rows': 15}),
+    description = forms.CharField(widget=MarkDownInput(attrs={'cols': 90, 'rows': 15}),
                     help_text=_('Markdown syntax is allowed'))
     honeypot    = forms.CharField(required=False,
                                 label=_('If you enter anything in this field '\

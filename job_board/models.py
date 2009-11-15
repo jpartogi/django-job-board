@@ -4,6 +4,7 @@ from django.contrib.sitemaps import ping_google
 from django.utils.translation import ugettext_lazy as _
 
 from job_board.manager import JobManager
+from wmd import models as wmd_models
 
 TYPE = (
         ('P', _('Permanent')),
@@ -30,7 +31,7 @@ class Job(models.Model):
     title           = models.CharField(max_length=50, verbose_name=_('job title'),
                       help_text=_('job title'))
     slug            = models.SlugField(max_length=50)
-    description     = models.TextField()
+    description     = wmd_models.MarkDownField()
     posted          = models.DateTimeField(auto_now_add=True)
     location        = models.CharField(max_length=128, help_text=_('job location'))
     onsite_required = models.BooleanField(default=False)
