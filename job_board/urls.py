@@ -39,6 +39,8 @@ urlpatterns = patterns('',
         job_detail,
         name='job-detail'),
 
+    url(r'^wmd/', include('wmd.urls')),
+    
     url(r'^$',
         job_list,
         name='job-list'), # This must be last after everything else has been evaluated
