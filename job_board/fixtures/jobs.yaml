@@ -3,6 +3,7 @@
   fields:
     name : Programming
     slug : programming
+    
 - model: job_board.JobCategory
   pk: 2
   fields:

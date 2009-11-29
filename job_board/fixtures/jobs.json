@@ -1,0 +1,33 @@
+[
+    {
+        "model": "job_board.JobCategory",
+        "pk": 1,
+        "fields": {
+            "name": "Programming",
+            "slug": "programming"
+        }
+    },{
+        "model": "job_board.JobCategory",
+        "pk": 1,
+        "fields": {
+            "name": "Design",
+            "slug": "design"
+        }
+    },{
+        "model": "job_board.Job",
+        "pk": 1,
+        "fields": {
+            "title": "Django Developer",
+            "slug": "django-developer",
+            "description": "Django Developer for a website",
+            "posted": "2009-01-01 00:00:00",
+            "location": "San Fransisco, CA",
+            "onsite_required": true,
+            "job_type": "C",
+            "category": 1,
+            "to_apply": "Send your resume to John Doe (john.doe@company.com)",
+            "website": "www.example.com",
+            "company_name": "Example Corps."
+        }
+    }
+]
