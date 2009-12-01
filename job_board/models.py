@@ -2,8 +2,10 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.contrib.sitemaps import ping_google
 from django.utils.translation import ugettext_lazy as _
+from django.core.signals import request_finished
 
 from job_board.manager import JobManager
+from job_board.signals import view_job
 from wmd import models as wmd_models
 
 TYPE = (
@@ -42,6 +44,7 @@ class Job(models.Model):
     website         = models.URLField(verify_exists=False, null=True, blank=True,
                       help_text=_('"www.company.com"'))
     company_name    = models.CharField(max_length=128)
+    viewed          = models.IntegerField(editable=False)
 
     objects = JobManager()
 
@@ -61,7 +64,14 @@ class Job(models.Model):
              # Bare 'except' because we could get a variety
              # of HTTP-related exceptions.
              pass
-    
+
+    def on_job_view(sender, **kwargs):
+        job = kwargs['job']
+        job.viewed = job.viewed + 1
+        job.save()
+
+    view_job.connect(on_job_view)
+
     class Meta:
         ordering = ['-posted']
         get_latest_by = 'posted'

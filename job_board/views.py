@@ -6,6 +6,7 @@ from django.views.generic import list_detail
 
 from job_board.models import *
 from job_board.forms import *
+from job_board.signals import view_job
 
 queryset = Job.objects.filter()
 
@@ -36,16 +37,19 @@ def job_detail(request, slug=None, object_id=None):
         "job_board/detail.html",
         "job_board/job_detail.html",
     )
-
+    
     template = select_template(job_detail_template)
     template_name = template.name
+
+    job = Job.objects.get(pk=object_id)
+    view_job.send(sender=job_detail, job=job)
 
     return list_detail.object_detail(request, queryset,
                                      object_id = object_id,
                                      slug = slug,
                                      template_name = template_name,
                                      extra_context = extra_context,
-                                     template_object_name = template_object_name)
+                                     template_object_name = template_object_name)     
 
 class JobFormPreview(FormPreview):
     preview_template = 'job_board/preview.html'

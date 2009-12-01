@@ -25,7 +25,8 @@
             {{ job.company_name }}
             {% endif %}
 
-            <span class="small"><em>{% trans 'posted' %}</em> {{ job.posted|timesince }} <em>ago</em></span>
+            <span class="small"><em>{% trans 'viewed' %}</em> job.viewed {% trans 'times' %} <em>{% trans 'since' %}</em>
+                {{ job.posted|timesince }} <em>ago</em></span>
         </div>
     {% endfor %}
     </div>
