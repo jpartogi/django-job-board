@@ -4,7 +4,7 @@ from django.contrib.sitemaps import FlatPageSitemap, GenericSitemap
 from job_board.models import Job
 from job_board.feeds import JobFeed
 from job_board.forms import JobForm
-from job_board.views import JobFormPreview, job_list, job_detail
+from job_board.views import JobFormPreview, job_list, job_detail, job_search
 
 feeds = {
     'jobs': JobFeed,
@@ -40,7 +40,11 @@ urlpatterns = patterns('',
         name='job-detail'),
 
     url(r'^wmd/', include('wmd.urls')),
-    
+
+    url(r'^search/$',
+        job_search,
+        name='job-search'),
+
     url(r'^$',
         job_list,
         name='job-list'), # This must be last after everything else has been evaluated
