@@ -42,7 +42,7 @@ def job_search(request):
     if ('q' in request.GET) and request.GET['q'].strip():
         query_string = request.GET['q']
 
-        query = get_query(query_string, ['title', 'location', 'description'])
+        query = get_query(query_string, ['title', 'location', 'description', 'company_name', 'website'])
 
         job_list = Job.objects.filter(query).order_by('-posted')
 
