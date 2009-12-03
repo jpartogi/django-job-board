@@ -16,19 +16,7 @@
         {% else %}
             {{ field.label_tag }} {{ field }}
         {% endifequal %}
-            <span>                
-                {% ifequal field.help_text "job title" %}
-                    {% trans '"Ruby on Rails Developer"' %}
-                {% else %}
-                    {% ifnotequal field.help_text "job location" %}
-                    {{ field.help_text }}
-                    {% endifnotequal %}
-                {% endifequal %}
-
-                {% ifequal field.help_text "job location" %}
-                    {% trans '"San Fransisco, CA"' %}
-                {% endifequal %}
-            </span>
+            <span>{{ field.help_text }}</span>
         </p>
     {% endfor %}
 
