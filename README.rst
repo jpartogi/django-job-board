@@ -2,13 +2,14 @@ django-job-board
 ================
 
 django-job-board is a dead simple django based pluggable job board application
-that is extracted from the original Scrum8.com and is currently online at http://jobs.scrum8.com
+that is extracted from the original Scrum8.com and is currently live at http://jobs.scrum8.com
 
 Dependencies
 ------------
 To install django-job-board on your django site, you need these two django applications:
 
-#. django-commons: http://github.com/scrum8/django-commons/
+#. django-commons       : http://github.com/scrum8/django-commons/
+#. django-wmd-editor    : http://github.com/scrum8/django-wmd-editor/
 
 Installation
 ------------
@@ -20,6 +21,7 @@ To install django-job-board on your django site, you would need to do the follow
   INSTALLED_APPS = (
     ...
     'job_board',
+    'wmd',
     'commons',
   )
 
