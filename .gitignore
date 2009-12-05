@@ -1,15 +1,10 @@
 # use glob syntax.
-syntax: glob
-hg.log
+
 settings.py
 *.iml
 *.ipr
 *.iws
 *.elc
 *.pyc
-*~
-.project
-.pydevproject
-
 nbproject/*
-.ropeproject/*
+
