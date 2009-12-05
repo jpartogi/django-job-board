@@ -2,7 +2,6 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.contrib.sitemaps import ping_google
 from django.utils.translation import ugettext_lazy as _
-from django.core.signals import request_finished
 
 from job_board.manager import JobManager
 from job_board.signals import view_job
@@ -15,9 +14,9 @@ TYPE = (
     )
 
 class JobCategory(models.Model):
-    name        = models.CharField(max_length=50)
-    description = models.TextField(null=True, blank=True)
-    slug        = models.SlugField(max_length=50)
+    name            = models.CharField(max_length=50)
+    description     = models.TextField(null=True, blank=True)
+    slug            = models.SlugField(max_length=50)
 
     def __unicode__(self):
         return self.name
@@ -28,7 +27,10 @@ class JobCategory(models.Model):
     class Meta:
         verbose_name_plural = _('categories')
         ordering = ['name']
-        
+
+class Checklist(models.Model):
+    question        = models.CharField(max_length=100)
+
 class Job(models.Model):
     title           = models.CharField(max_length=50, verbose_name=_('job title'),
                       help_text=_('job title'))
@@ -44,7 +46,8 @@ class Job(models.Model):
     website         = models.URLField(verify_exists=False, null=True, blank=True,
                       help_text=_('"www.company.com"'))
     company_name    = models.CharField(max_length=128)
-    viewed          = models.IntegerField(editable=False)
+    viewed          = models.IntegerField(editable=False, default=1)
+    checklist       = models.ManyToManyField(Checklist, through='JobChecklist')
 
     objects = JobManager()
 
@@ -75,3 +78,11 @@ class Job(models.Model):
     class Meta:
         ordering = ['-posted']
         get_latest_by = 'posted'
+
+class JobChecklist(models.Model):
+    checklist       = models.ForeignKey(Checklist)
+    job             = models.ForeignKey(Job)
+    answer          = models.BooleanField()
+
+    class Meta:
+        db_table = 'job_board_job_checklist'
