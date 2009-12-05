@@ -15,8 +15,13 @@
         {% ifequal form.cleaned_data.job_type 'I' %}{% trans 'Internship' %}{% endifequal %}
     </div>
 
-    <div><strong>{% trans 'Location' %}:</strong>&nbsp;{{ form.location.data }}&nbsp;
-        {% if form.onsite_required %}({% trans 'Required onsite' %}){% endif %}</div>
+    <div><strong>{% trans 'Location' %}:</strong>
+        {% if job.onsite_required %}
+            {{ job.location }}
+        {% else %}
+            {% trans 'Telecommute' %}
+        {% endif %}&nbsp;
+    </div>
 
     <div class="desc">
     {% autoescape on %}{{ form.description.data|markdown }}{% endautoescape %}

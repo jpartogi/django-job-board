@@ -7,7 +7,7 @@ from wmd.widgets import MarkDownInput
 
 class JobForm(ModelForm):
     description = forms.CharField(widget=MarkDownInput(attrs={'cols': 90, 'rows': 15}))
-    onsite_required = forms.BooleanField(initial=True)
+    onsite_required = forms.BooleanField(initial=True, required=False)
     honeypot    = forms.CharField(required=False,
                                 label=_('If you enter anything in this field '\
                                         'your comment will be treated as spam'))
