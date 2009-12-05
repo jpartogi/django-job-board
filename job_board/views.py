@@ -44,7 +44,7 @@ def job_search(request):
 
         query = get_query(query_string, ['title', 'location', 'description', 'company_name', 'website'])
 
-        job_list = Job.objects.filter(query).filter_date().order_by('-posted')
+        job_list = Job.objects.filter_date().filter(query).order_by('-posted')
 
     template = select_template(job_list_template) # returns Template object
     template_name = template.name
