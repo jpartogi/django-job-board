@@ -18,8 +18,12 @@
     {% if job.website %}<div><strong>{% trans 'Website' %}:</strong> {{ job.website|urlize }}</div>{% endif %}
     <div><strong>{% trans 'Category' %}:</strong>&nbsp;{{ job.category }}</div>
     <div><strong>{% trans 'Type' %}:</strong>&nbsp;{{ job.get_job_type_display }}</div>
-    <div><strong>{% trans 'Location' %}:</strong>&nbsp;
-        {{ job.location }}&nbsp;{% if job.onsite_required %}({% trans 'Required onsite' %}){% endif %}
+    <div><strong>{% trans 'Location' %}:</strong>
+        {% if job.onsite_required %}
+            {{ job.location }}
+        {% else %}
+            {% trans 'Telecommute' %}
+        {% endif %}&nbsp;
     </div>
 
     <div class="desc">

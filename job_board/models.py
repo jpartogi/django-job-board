@@ -37,8 +37,8 @@ class Job(models.Model):
     slug            = models.SlugField(max_length=50)
     description     = wmd_models.MarkDownField()
     posted          = models.DateTimeField(auto_now_add=True)
-    location        = models.CharField(max_length=128, help_text=_('job location'))
-    onsite_required = models.BooleanField(default=False)
+    location        = models.CharField(max_length=128, null=True, blank=True, help_text=_('job location'))
+    onsite_required = models.BooleanField(default=True)
     job_type        = models.CharField(max_length=1, choices=TYPE)
     category        = models.ForeignKey(JobCategory, verbose_name=_('job category'))
     to_apply        = models.CharField(max_length=128, verbose_name=_('how to apply'),

@@ -23,7 +23,13 @@
     <div id="job-list">
     {% for job in job_list %}
         <div class="block {% cycle 'odd' 'even' %}">
-            <strong>{{ job.location }}</strong>: <a href='{{ job.get_absolute_url }}'>{{ job.title }}</a>
+            <strong>
+                {% if job.onsite_required %}
+                    {{ job.location }}
+                {% else %}
+                    {% trans 'Telecommute' %}
+                {% endif %}
+            </strong>: <a href='{{ job.get_absolute_url }}'>{{ job.title }}</a>
             <span class="small">{% trans 'at' %}</span>
             
             {% if job.website %} 
